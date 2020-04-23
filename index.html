@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script>
-$(window).on('load', function(){
-//$(document).ready(function(){
-//$(parent.document).find('iframe').focus();
-$(document).find('iframe').focus();
-})
-</script>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Allegory of the Cave</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <script type='text/javascript'>
+      document.onmousedown = function() {window.focus();};
+    </script>
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="Build/UnityLoader.js"></script>
     <script>
