@@ -1,4 +1,4 @@
-# Allegory-of-the-Cave
+# Allegory of the Cave
 A 2D Roguelike where you play as Plato in a cave.
 
 This project is an extension of the Unity2D Roguelike tutorial.
