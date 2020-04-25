@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+
         enemies = new List<Enemy>();
         boardScript = GetComponent<BoardManager>();
         InitGame();
@@ -64,8 +65,8 @@ public class GameManager : MonoBehaviour
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
 
-        restartButton.SetActive(false);
         exitButton.SetActive(false);
+        restartButton.SetActive(false);
         levelText.text = "Day " + level;
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
