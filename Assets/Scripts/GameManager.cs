@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -77,31 +78,35 @@ public class GameManager : MonoBehaviour
 
     public void InitGame()
 	{
-        doingSetup = true;
+        try
+        {
+            doingSetup = true;
 
-        shownLevel = level;
+            shownLevel = level;
 
 
-        if (level > PlayerPrefs.GetInt("HighScore"))
-            PlayerPrefs.SetInt("HighScore", level);
+            if (level > PlayerPrefs.GetInt("HighScore"))
+                PlayerPrefs.SetInt("HighScore", level);
 
-        restartButton = GameObject.Find("RestartButton");
-        exitButton = GameObject.Find("ExitButton");
-        levelImage = GameObject.Find("LevelImage");
-        levelText = GameObject.Find("LevelText").GetComponent<Text>();
-        highScore = GameObject.Find("HighScore");
+            restartButton = GameObject.Find("RestartButton");
+            exitButton = GameObject.Find("ExitButton");
+            levelImage = GameObject.Find("LevelImage");
+            levelText = GameObject.Find("LevelText").GetComponent<Text>();
+            highScore = GameObject.Find("HighScore");
 
-        highScore.SetActive(false);
-        restartButton.SetActive(false);
-        exitButton.SetActive(false);
-        levelText.text = "level " + level;
-        levelImage.SetActive(true);
-        Invoke("HideLevelImage", levelStartDelay);
+            highScore.SetActive(false);
+            restartButton.SetActive(false);
+            exitButton.SetActive(false);
+            levelText.text = "level " + level;
+            levelImage.SetActive(true);
+            Invoke("HideLevelImage", levelStartDelay);
 
-        enemies.Clear();
-        fires.Clear();
-        boardScript.SetupScene(level);
-
+            enemies.Clear();
+            fires.Clear();
+            boardScript.SetupScene(level);
+        }
+        catch (Exception) { }
+        return;
 	}
 
     private void HideLevelImage()
