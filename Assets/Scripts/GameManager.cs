@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
             fires.Clear();
             boardScript.SetupScene(level);
         }
-        catch (Exception) { }
+        catch (Exception) {InitGame(); }
         return;
 	}
 
