@@ -150,7 +150,7 @@ public class BoardManager : MonoBehaviour
         InitialiseList();
         Instantiate(exit, ExitPosition(), Quaternion.identity);
 
-        if(level >= 13)
+        if(level >= 10)
             LayoutObjectAtRandom(wallTiles, 8, 12);
         else
             LayoutObjectAtRandom(wallTiles.GetRange(0,1), 10,14);
@@ -161,7 +161,7 @@ public class BoardManager : MonoBehaviour
         if (!player.GetComponent<Player>().CanProducePath(player.GetComponent<Transform>().transform, exitLocation))
             SetupScene(level);
 
-        if(level >= 13)
+        if(level >= 10)
             LayoutObjectAtRandom(moveableWallTiles, 4, 6);
 
         LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);

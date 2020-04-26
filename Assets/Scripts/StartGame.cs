@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StartGame : MonoBehaviour
 {
@@ -9,14 +10,23 @@ public class StartGame : MonoBehaviour
     public GameObject[] outerWallTiles;
     public GUISkin buttonSkin;
 
+    private GameObject continueButton;
+    private GameObject highScoreTextObject;
+    private Text highScoreText;
 
-    public GameObject newGameButton;
-    public GameObject continueButton;
+
+
     void Awake()
     {
-        newGameButton = GameObject.FindGameObjectWithTag("NewGameButton");
+        highScoreTextObject = GameObject.Find("HighScoreText");
+        highScoreText = highScoreTextObject.GetComponent<Text>();
         continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
+        highScoreTextObject.SetActive(true);
 
+        if (PlayerPrefs.GetInt("HighScore") <= 1)
+            highScoreTextObject.SetActive(false);
+        else
+            highScoreText.text = "highscore: " + PlayerPrefs.GetInt("HighScore") + " days";
         if (PlayerPrefs.GetInt("Level")<=1)
             continueButton.gameObject.SetActive(false);
         else

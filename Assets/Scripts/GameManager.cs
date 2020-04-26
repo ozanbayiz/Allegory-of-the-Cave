@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private GameObject restartButton;
     private GameObject exitButton;
     private Text levelText;
+    private GameObject highScore;
     private GameObject levelImage;
     public int level = 1; //change back later
     private int shownLevel;
@@ -26,12 +27,17 @@ public class GameManager : MonoBehaviour
     private bool firesMoving;
     private bool doingSetup;
 
+    private GameObject firstTime;
+    private GameObject enemy1;
+    private GameObject walls;
+    private GameObject enemy2;
+    private GameObject enemy3;
+    private GameObject fire;
+
     // Start is called before the first frame update
     void Awake()
-    { 
+    {
        level = PlayerPrefs.GetInt("Level");
-
-        Debug.Log("Loading level: " + level);
 
         if (instance == null)
         {
@@ -51,48 +57,91 @@ public class GameManager : MonoBehaviour
     private void OnLevelWasLoaded(int index)
     {
         PlayerPrefs.SetInt("Level", level);
+
+        firstTime = GameObject.Find("FirstTime");
+        enemy1 = GameObject.Find("Enemy1");
+        enemy2 = GameObject.Find("Enemy2");
+        enemy3 = GameObject.Find("Enemy3");
+        fire = GameObject.Find("Fire");
+        walls = GameObject.Find("Walls");
+
+        firstTime.SetActive(false);
+        enemy1.SetActive(false);
+        enemy2.SetActive(false);
+        enemy3.SetActive(false);
+        fire.SetActive(false);
+        walls.SetActive(false);
+
         InitGame();
 	}
 
     public void InitGame()
 	{
-        shownLevel = level;
-        //PlayerPrefs.SetInt("Level", level);
         doingSetup = true;
+
+        shownLevel = level;
+
+
+        if (level > PlayerPrefs.GetInt("HighScore"))
+            PlayerPrefs.SetInt("HighScore", level);
 
         restartButton = GameObject.Find("RestartButton");
         exitButton = GameObject.Find("ExitButton");
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        highScore = GameObject.Find("HighScore");
 
-        exitButton.SetActive(false);
+        highScore.SetActive(false);
         restartButton.SetActive(false);
-        levelText.text = "Day " + level;
+        exitButton.SetActive(false);
+        levelText.text = "level " + level;
         levelImage.SetActive(true);
         Invoke("HideLevelImage", levelStartDelay);
 
         enemies.Clear();
         fires.Clear();
         boardScript.SetupScene(level);
+
 	}
 
     private void HideLevelImage()
 	{
         levelImage.SetActive(false);
-        doingSetup = false;
-        enabled = true;
 
+        doingSetup = false;
+
+        enabled = true;
+        if (level == 1)
+            firstTime.SetActive(true);
+        if (level == 3)
+            enemy1.SetActive(true);
+        if (level == 10)
+            walls.SetActive(true);
+        if (level == 13)
+            enemy2.SetActive(true);
+        if (level == 34)
+            enemy3.SetActive(true);
+        if (level == 55)
+            fire.SetActive(true);
 	}
 
     public void GameOver()
 	{
+        firstTime.SetActive(false);
+        enemy1.SetActive(false);
+        enemy2.SetActive(false);
+        enemy3.SetActive(false);
+        fire.SetActive(false);
+        walls.SetActive(false);
         PlayerPrefs.SetInt("Level",1);
         level = 1;
-        levelText.text = "After " + shownLevel + " days, you starved.";
-        boardScript.ResetFib();
-        levelImage.SetActive(true);
         restartButton.SetActive(true);
         exitButton.SetActive(true);
+        levelText.text = "after " + shownLevel + " levels, you ran out of energy";
+        highScore.GetComponent<Text>().text = "highscore: " + PlayerPrefs.GetInt("HighScore");
+        highScore.SetActive(true);
+        boardScript.ResetFib();
+        levelImage.SetActive(true);
         enabled = false;
 	}
 
