@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour
             boardScript.SetupScene(level);
         }
         catch (Exception) { }
-        return;
 	}
 
     private void HideLevelImage()
@@ -159,7 +158,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddEnemyToList(Enemy script)
-	{
+    {
         enemies.Add(script);
 	}
     public void RemoveEnemyFromList(Enemy script)
