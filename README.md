@@ -1,4 +1,7 @@
 # Allegory of the Cave
+
+![](https://github.com/ozanbayiz/Allegory_of_the_Cave/AotCGamePlayScreenshot.png/)
+
 A 2D Roguelike where you play as Plato in a cave.
 
 This project is an extension of the Unity2D Roguelike tutorial. All assets present in this but not the original tutorial are my own creation.
