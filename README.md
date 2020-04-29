@@ -1,6 +1,6 @@
 # Allegory of the Cave
 
-![](https://github.com/ozanbayiz/Allegory_of_the_Cave/AotCGamePlayScreenshot.png/)
+![](https://github.com/ozanbayiz/Allegory-of-the-Cave/blob/master/AotCGamePlayScreenshot.png)
 
 A 2D Roguelike where you play as Plato in a cave.
 
