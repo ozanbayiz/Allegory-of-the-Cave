@@ -44,6 +44,7 @@ public class StartGame : MonoBehaviour
 
     public void NewGame()
     {
+        PlayerPrefs.SetInt("Food", 100);
         PlayerPrefs.SetInt("Level", 1);
         Application.LoadLevel("Main");
     }

@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        playerFoodPoints = PlayerPrefs.GetInt("Food");
        level = PlayerPrefs.GetInt("Level");
 
         if (instance == null)
@@ -48,7 +49,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-
 
         enemies = new List<Enemy>();
         boardScript = GetComponent<BoardManager>();
@@ -66,20 +66,11 @@ public class GameManager : MonoBehaviour
         fire = GameObject.Find("Fire");
         walls = GameObject.Find("Walls");
 
-        firstTime.SetActive(false);
-        enemy1.SetActive(false);
-        enemy2.SetActive(false);
-        enemy3.SetActive(false);
-        fire.SetActive(false);
-        walls.SetActive(false);
-
         InitGame();
 	}
 
     public void InitGame()
 	{
-        try
-        {
             doingSetup = true;
 
             shownLevel = level;
@@ -87,6 +78,13 @@ public class GameManager : MonoBehaviour
 
             if (level > PlayerPrefs.GetInt("HighScore"))
                 PlayerPrefs.SetInt("HighScore", level);
+
+            firstTime.SetActive(false);
+            enemy1.SetActive(false);
+            enemy2.SetActive(false);
+            enemy3.SetActive(false);
+            fire.SetActive(false);
+            walls.SetActive(false);
 
             restartButton = GameObject.Find("RestartButton");
             exitButton = GameObject.Find("ExitButton");
@@ -104,8 +102,6 @@ public class GameManager : MonoBehaviour
             enemies.Clear();
             fires.Clear();
             boardScript.SetupScene(level);
-        }
-        catch (Exception) { }
 	}
 
     private void HideLevelImage()
@@ -158,7 +154,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddEnemyToList(Enemy script)
-    {
+	{
         enemies.Add(script);
 	}
     public void RemoveEnemyFromList(Enemy script)
@@ -201,8 +197,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < enemies.Count; i++)
         {
             enemies[i].MoveEnemy();
-            yield return new WaitForSeconds(enemies[i].moveTime);
+            //yield return new WaitForSeconds(enemies[i].moveTime);
         }
+        yield return new WaitForSeconds(0.1f);
         enemiesMoving = false;
         if (!enemiesMoving && !firesMoving)
             playersTurn = true;
