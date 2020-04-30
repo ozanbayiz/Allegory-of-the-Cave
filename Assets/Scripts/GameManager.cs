@@ -218,6 +218,7 @@ public class GameManager : MonoBehaviour
     {
         Player.instance.food = playerFoodPoints;
         enabled = true;
+	PlayerPrefs.SetInt("Food", playerFoodPoints);
         SoundManager.instance.musicSource.Play();
         SceneManager.LoadScene("Main");
     }
