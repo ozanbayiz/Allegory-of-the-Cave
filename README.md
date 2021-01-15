@@ -6,4 +6,4 @@ A 2D Roguelike where you play as Plato in a cave.
 
 This project is an extension of the Unity2D Roguelike. All assets present in this but not the original tutorial are my own creation.
 
-Play the game [here](https://ozanbayiz.github.io/Allegory-of-the-Cave/). The formatting of the text is off but should be fixed in fullscreen. (DISCLAIMER) This project is still a work in progress and there are some bugs I am working to fix. The build is susceptible to crashes so play the game at your own discretion.
+Play the game [here](https://ozanbayiz.github.io/Allegory-of-the-Cave/). The formatting of the text is slighty off but should be fixed in fullscreen.
